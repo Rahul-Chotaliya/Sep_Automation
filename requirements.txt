@@ -1,0 +1,7 @@
+pandas
+openpyxl
+opencv-python
+mediapipe
+pywin32
+pdf2image  # For PDF to image, requires poppler
+pillow
