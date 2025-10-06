@@ -5,6 +5,7 @@ from coordinate_detector import get_location_coordinates
 from photoshop_engine import place_logo_in_photoshop
 from exporter import export_jpg
 from config import PSD_OUTPUT_DIR
+from utils import detect_garment_type_from_location
 
 # === USER INPUTS ===
 EXCEL_PATH = r"C:\Users\rahul\Desktop\SEP AUTOMATION\PBImageBuilderBU - 1200 x 1800 pxl.xlsx"
@@ -39,7 +40,9 @@ def run_automation():
             continue
 
         psd_name = f"{part_id}_{color}_{location_name}"
-        doc = place_logo_in_photoshop(image_path, logo_path, location_name, coords, psd_name, PSD_OUTPUT_DIR)
+        location_name = str(row["Decoration Location"]).strip().upper()
+        garment_type = detect_garment_type_from_location(location_name)
+        doc = place_logo_in_photoshop(image_path, logo_path, location_name, coords, psd_name, PSD_OUTPUT_DIR,garment_type)
 
         if doc:
             export_jpg(doc, final_name)
