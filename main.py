@@ -1,3 +1,5 @@
+import utils.transport
+import utils.session
 import os
 from excel_reader import read_excel
 from image_locator import find_image, find_logo

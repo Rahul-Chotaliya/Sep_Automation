@@ -125,7 +125,7 @@ def convert_pdf_to_png(pdf_path: str) -> str:
     print(f"   -> PDF conversion simulated. Mock PNG path: {temp_file.name}")
     return temp_file.name
 
-def compute_logo_size(garment_type: str, logo_path: str) -> Tuple[int, int]:
+def compute_logo_size(garment_type: str, logo_path: str,location: str) -> Tuple[int, int]:
     """
     Garment type aur logo ke aspect ratio ke aadhar par target logo size nikaalta hai.
     """
@@ -156,7 +156,10 @@ def compute_logo_size(garment_type: str, logo_path: str) -> Tuple[int, int]:
     target_width = 99  # Default fallback
 
     if garment_type in ["T-SHIRT", "SHIRT", "SCRUB TOP", "SCRUB PANT", "JACKET", "HOODIE", "SWEAT SHIRT"]:
-        target_width = 99
+        if location not in  ["FULL-BACK","FULL-FRONT"]:
+            target_width = 99  
+        else:
+            target_width = 300
         if abs(aspect_ratio - 1.0) < 0.1:  # Agar logo square-ish hai
             target_width = 70
             
