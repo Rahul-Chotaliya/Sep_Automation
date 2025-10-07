@@ -29,6 +29,7 @@ def place_logo_in_photoshop(image_path, logo_path, location_name, coordinates, p
     try:
         app = win32com.client.Dispatch("Photoshop.Application")
         app.Visible = False
+        location = str(location_name).strip().upper().replace(" ","-")
         canvas_size = 1800 if garment_type == "T-SHIRT" else 1200
         # Open the main image
         doc = app.Open(image_path)
@@ -62,7 +63,7 @@ def place_logo_in_photoshop(image_path, logo_path, location_name, coordinates, p
         print(f"Bounds: {bounds}, Logo Width: {logo_width}, Logo Height: {logo_height}")
 
         # Get desired size from compute_logo_size
-        desired_width, desired_height = compute_logo_size(garment_type, logo_path)
+        desired_width, desired_height = compute_logo_size(garment_type, logo_path,location)
 
         # Calculate scale percentages (avoid division by zero)
         if logo_width == 0 or logo_height == 0:
